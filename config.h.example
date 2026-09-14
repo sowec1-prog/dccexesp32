@@ -1,0 +1,23 @@
+/* ESP32 DevKit V1 / ESP32-WROOM + Arduino L298P Motor Shield.
+ * Copy to config.h and set Wi-Fi values before building.
+ */
+
+// MotorDriver(PWM/enable, DCC direction, inverted, brake, current ADC,
+//             current calibration factor, trip mA, fault pin)
+// A0 must go to GPIO36 / VP only through the measured custom voltage divider.
+// This profile uses a 1.5 V short threshold with ESP32 6 dB ADC attenuation.
+#define ESP32_DEVKIT_L298P F("ESP32_DEVKIT_L298P"), \
+  new MotorDriver(4, 5, UNUSED_PIN, 18, 36, 0.537, 1500, UNUSED_PIN)
+#define MOTOR_SHIELD_TYPE ESP32_DEVKIT_L298P
+#define MAX_CURRENT 1500
+#define IP_PORT 2560
+
+#define ENABLE_WIFI true
+#define WIFI_SSID "YOUR_2_4_GHZ_WIFI"
+#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+#define WIFI_HOSTNAME "dccex-devkit"
+#define WIFI_CHANNEL 1
+#define WIFI_FORCE_AP false
+
+#define DISABLE_EEPROM
+#define STARTUP_DELAY 3000
