@@ -19,5 +19,15 @@
 #define WIFI_CHANNEL 1
 #define WIFI_FORCE_AP false
 
+// Optional LAN-only firmware update service. Keep it false until a strong
+// password hash is present in your ignored config.h. OTA uses the ESP's LAN IP
+// on UDP/TCP port 3232; never expose this port to the Internet.
+#define ENABLE_OTA false
+#define OTA_HOSTNAME "dccex-devkit-ota"
+#define OTA_PORT 3232
+// Generate an MD5 hash of a long unique OTA password and set it only in
+// config.h, never in this example or in Git:
+// #define OTA_PASSWORD_HASH "32_HEX_CHARACTER_MD5_HASH"
+
 #define DISABLE_EEPROM
 #define STARTUP_DELAY 3000

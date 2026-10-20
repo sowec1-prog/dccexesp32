@@ -28,6 +28,7 @@
 
 #include "DCCEX.h"
 #include "Display_Implementation.h"
+#include "OTAService.h"
 #ifdef ARDUINO_ARCH_ESP32
 #include "Sniffer.h"
 #include "DCCDecoder.h"
@@ -95,6 +96,7 @@ void setup()
   // ESP32 needs wifi on always
   PASSWDCHECK(WIFI_PASSWORD); // compile time check
   WifiESP::setup(WIFI_SSID, WIFI_PASSWORD, WIFI_HOSTNAME, IP_PORT, WIFI_CHANNEL, WIFI_FORCE_AP);
+  OtaService::begin();
 #endif // ARDUINO_ARCH_ESP32
 
 #if ETHERNET_ON
@@ -170,6 +172,7 @@ void loop()
 #ifndef WIFI_TASK_ON_CORE0
   WifiESP::loop();
 #endif
+  OtaService::loop();
 #endif //ARDUINO_ARCH_ESP32
 #if ETHERNET_ON
   EthernetInterface::loop();

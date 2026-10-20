@@ -1,0 +1,6 @@
+# Device-specific credentials and OTA authentication never belong in Git.
+config.h
+ota-secrets.local
+
+# PlatformIO build products.
+.pio/

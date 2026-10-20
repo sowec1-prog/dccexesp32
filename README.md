@@ -48,6 +48,19 @@ Soubor `config.h` je záměrně ignorovaný Gitem, aby se do GitHubu neuložilo 
 2. Doplň název a heslo své 2,4GHz Wi-Fi.
 3. Ponech `WIFI_FORCE_AP false` pro připojení do domácí LAN.
 
+## OTA – vzdálená aktualizace firmware
+
+Repozitář obsahuje volitelnou OTA službu pro **ESP32 DevKit V1**. První nahrání OTA firmware musí proběhnout přes USB. Potom lze další ověřené sestavení nahrát po domácí Wi‑Fi na IP adresu ESP32.
+
+- V `config.h` nastav `ENABLE_OTA true`, unikátní `OTA_HOSTNAME`, port `3232` a `OTA_PASSWORD_HASH`.
+- Do GitHubu nepatří Wi‑Fi údaje ani OTA heslo/hash; `config.h` zůstává ignorovaný.
+- Firmware používá dvě OTA aplikační oblasti (`app0` a `app1`). Nový obraz se zapíše nejprve do neaktivní oblasti a až pak se restartuje.
+- Na začátku OTA se DCC‑EX pokusí vypnout veškeré trakční napájení. Po restartu zůstává MAIN bezpečně OFF.
+- OTA je určena pouze pro privátní LAN. **Neotevírej port 3232 do internetu**, nepoužívej routerový port-forwarding ani host exposure.
+- DCC‑EX již používá mDNS pro Rocrail, proto OTA nepřidává druhou mDNS službu; nahrávání cíluje přímo na aktuální LAN IP ESP32.
+
+Před každým vzdáleným nahráním nejdřív sestav firmware, ověř jeho velikost a ponech USB jako záchrannou cestu pro případ chyby Wi‑Fi nebo firmware.
+
 ## Sestavení
 
 Nainstaluj PlatformIO a v kořeni projektu spusť:
